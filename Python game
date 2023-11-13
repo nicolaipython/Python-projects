@@ -1,0 +1,141 @@
+from random import randint
+from random import choice
+from time import sleep
+
+
+def stats():
+    print("These are your stats")
+    print("||-{:^30}-||".format("Stats"))
+    print("||-{:^30}-||".format("-"*30))
+    print("||-{:^30}-||".format(f"Health - {health}"))
+    print("||-{:^30}-||".format(f"{item_num} {item}s"))
+    print("||-{:^30}-||".format(f"XP points - {xp}"))
+    return()
+
+sea_pearl_choice = False
+shark_choice = False
+valid = False
+wait = 0
+count = 0
+item = "bob"
+
+for i in range(3):
+    sleep(wait)
+    print("||{:^30}||".format("Welcome To The Jungle"))
+    wait = wait + 1
+
+sleep(3)
+print("To win you have to get through the Jungle and find the pearl")
+sleep(3)
+question1 = input("Do you have what it takes?: ")
+question1 = question1.lower()
+if question1[0] == "y":
+    sleep(1)
+    print("-{:^5}-".format("The adventure has started, which way do you want to go?"))
+    print("||{:^7}||".format("N"))
+    print("||{:<7}||".format("W     E"))
+    print("||{:^7}||".format("S"))
+    while valid == False:
+        direction = input("Direction: ")
+        if direction.upper() == "S" or direction.upper() =="SOUTH":
+            direction = "South"
+            valid = True
+        elif direction.upper() == "N" or direction.upper() == "NORTH":
+            direction = "North"
+            valid = True
+        elif direction.upper() == "W" or direction.upper()== "WEST":
+            direction = "West"
+            valid = True
+        elif direction.upper() == "E" or direction.upper() == "EAST":
+            direction = "East"
+            valid = True
+        else:
+            print("That is not a valid option chose somthing else")
+    sleep(1)
+    print("Ok lets go",direction,"and see where that takes us")
+    if direction[0] == "W":
+        sleep(1.5)
+        print("You have come across a Black Mamba one of the most deadly snakes on Earth")
+        print("Will you:\n a: fight it (high risk high reward)\n b: Go around it (you will gain nothing but could lose somthing)")
+        question2 = input()
+        question2 = question2.lower()
+        if question2 == "a":
+            snake_fight = 3
+            if snake_fight == 3:
+                print("You have beat the odds and won the snake fight but your health has dropped a bit")
+                sleep(2)
+                item_num = randint(5,7)
+                print("For this bravery you have gained",item_num,"arrows tipped in the venom of the snake")
+                xp = randint(5,10)
+                print("You have also gained",xp,"XP (experience points)")
+                item = "poison tipped arrows"
+                health = randint(85,97)
+                stats()
+            else:
+                print("That was the wrong decision")
+                sleep(1)
+                health = randint(60,90)
+                print("The snake beat you and your health has dropped from 100 to",health)
+                xp = randint(1,5)
+                print("But for your bravery you are rewarded with",xp,"XP (experience points)")
+                stats()
+        else:
+            print("You chose the boring route but at least you are safe (for now)")
+    elif direction[0] == "E":
+        sleep(1.5)
+        print("After traveling for many miles you finally hit the coast")
+        sleep(3)
+        sea_pearl = choice(["in a coral reef full of venomous animals","somewhere in the fast open ocean",
+        "behind the rugged cliffs further down the coast", "somewhere in back in the jungle"])
+        print("You know the pearl is",sea_pearl)
+        sleep(3)
+        print("So what do you do:\n\ta) Go into the sea\n\tb) Turn around and go back to the jungle"
+              "\n\tc) Climb along the rugged cliffs")
+        east_choice1 = input()
+        east_choice1 = east_choice1.lower()
+        while sea_pearl_choice == False:
+            if east_choice1 == "a" and sea_pearl == "in a coral reef full of venomous animals":
+                print("You have reached the reef after a long swim but as you start to look for the pear you realise somthing...")
+                sleep(2.3)
+                print("On your way in to the water you grazed your ankle and now its bleeding")
+                sleep(0.6)
+                print("Do you:\n\t a) Swim back and deal with it\n\t b) Keep going and take the risk")
+                east_choice2 = input()
+                east_choice2 = east_choice2.lower()
+                while shark_choice == False:
+                    if east_choice2 == "a":
+                        print("You are extremely tired after swimming back")
+                        print("Due to this your ")
+                        health = randint(65,76)
+                        print("You have gained a bit of XP from the long journey though")
+                        xp = randint(1,5)
+                        stats()
+                        shark_choice = True
+                    elif east_choice2 == "b":
+                        pass #stay
+                        shark_choice = True
+                    else:
+                        print("Chose somthing else")
+                sea_pearl_choice == True
+                sea_pearl_choice = sea_pearl_choice.lower()
+            elif east_choice1 == "a" and sea_pearl == "somewhere in the fast open ocean":
+                pass #ocean
+                sea_pearl_choice == True
+            elif east_choice1 == "b" and sea_pearl == "somewhere in back in the jungle":
+                pass #jungle
+                sea_pearl_choice == True
+            elif east_choice1 == "c" and sea_pearl == "behind the rugged cliffs further down the coast":
+                pass #cliffs
+                sea_pearl_choice == True
+            else:
+                print("Pick again")
+                count = count + 1
+            #remember count
+            #don't
+            #forget
+    elif direction[0] == "N":
+        pass
+    else: #direction is south
+        pass
+else:
+    print("Ok come back when you are ready")
